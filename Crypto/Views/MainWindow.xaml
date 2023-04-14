@@ -1,0 +1,188 @@
+﻿<Window x:Class="Crypto.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:Crypto.ViewModels"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:local="clr-namespace:Crypto.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="750" Width="1400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Icon="/Images/Crypto-logo.png">
+
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:TopTenCurrenciesViewModel}">
+            <local:TopTenCurrenciesView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:CoinsViewModel}">
+            <local:CoinsView/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Border CornerRadius="10"
+            BorderThickness="1"
+            BorderBrush="{StaticResource backColor2}"
+            Margin="5">
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <!--Navigation menu-->
+                <ColumnDefinition Width="250"/>
+                <!--Content section-->
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--#region Navigation Menu-->
+            <Border CornerRadius="10,0,0,10"
+                    Grid.Column="0"
+                    Background="{StaticResource backColor2}">
+
+                <StackPanel>
+
+                    <!--#region Logo-->
+                    <StackPanel Orientation="Horizontal"
+                                Height="45"
+                                Margin="15,25,0,40">
+
+                        <Image Source="/Images/Crypto-logo.png"/>
+
+                        <TextBlock Text="Crypto"
+                                   Foreground="{StaticResource textColor1}"
+                                   FontSize="20"
+                                   FontFamily="Montserrat"
+                                   FontWeight="Medium"
+                                   VerticalAlignment="Center"
+                                   Margin="10,0,10,0"/>
+
+                    </StackPanel>
+                    <!--#endregion-->
+
+                    <!--#region Menu Buttons-->
+                    <StackPanel>
+                        <RadioButton Style="{StaticResource menuButton}"
+                                     Tag="{StaticResource color4}"
+                                     IsChecked="True"
+                                     Command="{Binding ShowTopTenCurrencies}">
+
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="ArrowUpRightDots" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Top 10 currencies" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton Style="{StaticResource menuButton}"
+                                     Tag="{StaticResource color2}"
+                                     Command="{Binding ShowCoins}">
+
+                            <StackPanel Orientation="Horizontal">
+                                <fa:IconImage Icon="Coins" Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Coins" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+                    <!--#endregion-->
+                    
+                </StackPanel>
+                
+            </Border>
+            <!--#endregion-->
+
+            <!--#region Content Section-->
+            <Border CornerRadius="0,10,10,0"
+                    Grid.Column="1"
+                    Background="{StaticResource backColor4}">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!--Control bar-->
+                        <RowDefinition Height="25"/>
+                        <!--Header / Caption-->
+                        <RowDefinition Height="35"/>
+                        <!--Content section / Child views-->
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!--#region Control Bar-->
+                    <StackPanel x:Name="pnlControlBar"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
+                                MouseEnter="pnlControlBar_MouseEnter">
+
+                        <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Click="btnClose_Click">
+                            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+
+                        <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color6}"
+                                Click="btnMaximize_Click">
+                            <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+
+                        <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color8}"
+                                Click="btnMinimize_Click">
+                            <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+
+                    </StackPanel>
+                    <!--#endregion-->
+                    
+                    <!--#region Header-->
+
+                    <StackPanel Grid.Row="1"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+
+                        <fa:IconImage Icon="{Binding Icon}"
+                                      Height="20"
+                                      Width="20"
+                                      Foreground="{StaticResource textColor1}"
+                                      Margin="35,0,10,0"/>
+                        <TextBlock Text="{Binding Caption}"
+                                   Foreground="{StaticResource textColor1}"
+                                   FontSize="16"
+                                   FontFamily="Montserrat"
+                                   FontWeight="Medium"
+                                   VerticalAlignment="Center"/>
+
+                    </StackPanel>
+                    
+                    <!--#endregion-->
+
+                    <!--#region Content Section-->
+
+                    <ContentControl Content="{Binding CurrentChildView}"
+                                    Grid.Row="2"
+                                    Margin="25"/>
+
+                    <!--#endregion-->
+
+                </Grid>
+                
+            </Border>
+            <!--#endregion-->
+
+        </Grid>
+        
+    </Border>
+
+</Window>
