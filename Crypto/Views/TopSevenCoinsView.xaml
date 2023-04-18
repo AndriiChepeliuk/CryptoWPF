@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="Crypto.Views.TopTenCurrenciesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:Crypto.ViewModels"
+             xmlns:local="clr-namespace:Crypto.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewModel:TopSevenCoinsViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <ListView ItemsSource="{Binding Top7Conins}"
+                  Grid.Row="0"
+                  Background="Transparent"
+                  BorderBrush="Transparent"
+                  Foreground="White"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  HorizontalContentAlignment="Stretch">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{StaticResource backColor2}"
+                            BorderThickness="1"
+                            Margin="1 1 10 1"
+                            CornerRadius="8"
+                            Height="80">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center">
+                                
+                                <Rectangle Height="50"
+                                           Width="50"
+                                           RadiusX="25"
+                                           RadiusY="25">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="{Binding Small}"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" 
+                                       Text="{Binding Name}"
+                                       Style="{StaticResource simpleText}"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Grid.Column="2" 
+                                       Text="{Binding Symbol}"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Center"/>
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+        </ListView>
+
+    </Grid>
+    
+    
+</UserControl>

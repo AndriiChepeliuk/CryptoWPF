@@ -19,7 +19,7 @@
     </Window.DataContext>
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type viewModel:TopTenCurrenciesViewModel}">
+        <DataTemplate DataType="{x:Type viewModel:TopSevenCoinsViewModel}">
             <local:TopTenCurrenciesView/>
         </DataTemplate>
 
@@ -106,8 +106,6 @@
                     <Grid.RowDefinitions>
                         <!--Control bar-->
                         <RowDefinition Height="25"/>
-                        <!--Header / Caption-->
-                        <RowDefinition Height="35"/>
                         <!--Content section / Child views-->
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
@@ -146,32 +144,10 @@
                     </StackPanel>
                     <!--#endregion-->
                     
-                    <!--#region Header-->
-
-                    <StackPanel Grid.Row="1"
-                                Orientation="Horizontal"
-                                VerticalAlignment="Center">
-
-                        <fa:IconImage Icon="{Binding Icon}"
-                                      Height="20"
-                                      Width="20"
-                                      Foreground="{StaticResource textColor1}"
-                                      Margin="35,0,10,0"/>
-                        <TextBlock Text="{Binding Caption}"
-                                   Foreground="{StaticResource textColor1}"
-                                   FontSize="16"
-                                   FontFamily="Montserrat"
-                                   FontWeight="Medium"
-                                   VerticalAlignment="Center"/>
-
-                    </StackPanel>
-                    
-                    <!--#endregion-->
-
                     <!--#region Content Section-->
 
                     <ContentControl Content="{Binding CurrentChildView}"
-                                    Grid.Row="2"
+                                    Grid.Row="1"
                                     Margin="25"/>
 
                     <!--#endregion-->

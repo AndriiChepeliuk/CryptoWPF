@@ -8,6 +8,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Helpers/Styles/UIColors.xaml"/>
                 <ResourceDictionary Source="/Helpers/Styles/ButtonStyles.xaml"/>
+                <ResourceDictionary Source="/Helpers/Styles/Scroll.xaml"/>
+                <ResourceDictionary Source="/Helpers/Styles/TextBlockStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
