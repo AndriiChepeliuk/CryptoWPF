@@ -1,6 +1,4 @@
 ﻿using Crypto.Helpers;
-using FontAwesome.Sharp;
-using System;
 using System.Windows.Input;
 
 namespace Crypto.ViewModels;

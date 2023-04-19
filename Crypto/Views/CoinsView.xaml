@@ -36,7 +36,7 @@
             <Grid Width="300" HorizontalAlignment="Right" >
                 <TextBox x:Name="txtSearch" 
                          Style="{StaticResource textboxSearch}"
-                         Text="{Binding CoinId}">
+                         Text="{Binding SearchText}">
                 </TextBox>
             </Grid>
 
@@ -49,6 +49,16 @@
 
         </StackPanel>
 
+        <StackPanel Grid.Column="2" Grid.Row="1"
+                    Width="450" Height="50">
+            <TextBlock 
+                Style="{StaticResource simpleText}"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                Foreground="Red"
+                Text="{Binding ErrorMessage}"/>
+            
+        </StackPanel>
 
         <StackPanel Orientation="Horizontal"
                     Grid.Column="0" Grid.Row="0"
