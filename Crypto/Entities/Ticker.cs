@@ -25,4 +25,7 @@ public class Ticker
 
     [JsonProperty("converted_volume")]
     public Dictionary<string, decimal> ConvertedVolume { get; set; }
+
+    [JsonProperty("trade_url")]
+    public string TradeUrl { get; set; }
 }

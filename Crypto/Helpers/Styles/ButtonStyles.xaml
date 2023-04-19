@@ -109,5 +109,40 @@
 
     <!--#endregion-->
 
+    <!--#region Search Button-->
+    <Style x:Key="searchButton" TargetType="Button">
+
+        <!--#region Normal condition-->
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Margin" Value="5 0 0 0"/>
+        <Setter Property="Background" Value="{StaticResource backColor2}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="25"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--#endregion-->
+
+        <Style.Triggers>
+
+            <!--#region On hover style-->
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource color2}"/>
+                <Setter Property="Foreground" Value="{StaticResource color2}"/>
+            </Trigger>
+            <!--#endregion-->
+
+        </Style.Triggers>
+    </Style>
+    <!--#endregion-->
 
 </ResourceDictionary>

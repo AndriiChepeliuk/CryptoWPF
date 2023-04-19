@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="/Helpers/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="/Helpers/Styles/Scroll.xaml"/>
                 <ResourceDictionary Source="/Helpers/Styles/TextBlockStyles.xaml"/>
+                <ResourceDictionary Source="/Helpers/Styles/TextBoxStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

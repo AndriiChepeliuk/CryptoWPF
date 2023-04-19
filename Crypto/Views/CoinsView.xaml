@@ -4,16 +4,208 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModel="clr-namespace:Crypto.ViewModels"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:Crypto.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="700" d:DesignWidth="1400">
 
     <UserControl.DataContext>
         <viewModel:CoinsViewModel/>
     </UserControl.DataContext>
 
-    <StackPanel>
-        <Image Source="/Images/Crypto-logo.png"/>
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="2" Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+            <Grid Width="300" HorizontalAlignment="Right" >
+                <TextBox x:Name="txtSearch" 
+                         Style="{StaticResource textboxSearch}"
+                         Text="{Binding CoinId}">
+                </TextBox>
+            </Grid>
+
+            <Button Style="{StaticResource searchButton}"
+                    Command="{Binding FindCoinCommand}">
+                <fa:IconImage Icon="MagnifyingGlass" Width="20" Height="20" VerticalAlignment="Center"
+                              Foreground="{StaticResource backColor1}" HorizontalAlignment="Right"
+                              Margin="0 0 0 0"/>
+            </Button>
+
+        </StackPanel>
+
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="0" Grid.Row="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
+
+            <Rectangle Height="50"
+                       Width="50"
+                       RadiusX="25"
+                       RadiusY="25">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{Binding CoinByIdMarketData.Images.Small}"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <TextBlock Grid.Column="0" Grid.Row="0"
+                       Margin="10"
+                       Text="{Binding CoinByIdMarketData.Name}"
+                       Style="{StaticResource simpleText}"
+                       Foreground="White"
+                       FontSize="24"
+                       FontWeight="Medium"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+
+            <TextBlock Grid.Column="0" Grid.Row="0"
+                       Text="{Binding CoinByIdMarketData.Symbol}"
+                       Style="{StaticResource simpleText}"
+                       FontSize="20"
+                       FontWeight="Light"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="0" Grid.Row="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
+
+            <TextBlock Margin="10"
+                       Text="{Binding CoinByIdMarketData.MarketData.CurrentPrice[usd], StringFormat={}{0:c}}"
+                       Style="{StaticResource simpleText}"
+                       Foreground="White"
+                       FontSize="24"
+                       FontWeight="Light"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Border Grid.Column="0" Grid.Row="2" 
+                BorderBrush="{StaticResource backColor1}" 
+                BorderThickness="0 0 0 1"
+                Margin="5 0 5 0">
+            <Grid Width="450" HorizontalAlignment="Left" >
+                <TextBlock Text="Market Cap"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+
+                <TextBlock Text="{Binding CoinByIdMarketData.MarketData.MarketCap[usd], StringFormat={}{0:c0}}" 
+                           HorizontalAlignment="Right" 
+                           Foreground="White"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="3" 
+                BorderBrush="{StaticResource backColor1}" 
+                BorderThickness="0 0 0 1"
+                Margin="5 0 5 0">
+            <Grid Width="450" HorizontalAlignment="Left" >
+                <TextBlock Text="24 Hour Trading Vol"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+
+                <TextBlock Text="{Binding CoinByIdMarketData.MarketData.TotalVolume[usd], StringFormat={}{0:c0}}" 
+                           HorizontalAlignment="Right" 
+                           Foreground="White"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="4" 
+                BorderBrush="{StaticResource backColor1}" 
+                BorderThickness="0 0 0 1"
+                Margin="5 0 5 0">
+            <Grid Width="450" HorizontalAlignment="Left" >
+                <TextBlock Text="Fully Diluted Valuation"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+
+                <TextBlock Text="{Binding CoinByIdMarketData.MarketData.FullyDilutedValuation[usd], StringFormat={}{0:c0}}" 
+                           HorizontalAlignment="Right" 
+                           Foreground="White"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="2" 
+                BorderBrush="{StaticResource backColor1}" 
+                BorderThickness="0 0 0 1"
+                Margin="5 0 5 0">
+            <Grid Width="450" HorizontalAlignment="Left" >
+                <TextBlock Text="Circulating Supply"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+
+                <TextBlock Text="{Binding CoinByIdMarketData.MarketData.CirculatingSupply, StringFormat={}{0:#,#}}" 
+                           HorizontalAlignment="Right" 
+                           Foreground="White"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="3" 
+                BorderBrush="{StaticResource backColor1}" 
+                BorderThickness="0 0 0 1"
+                Margin="5 0 5 0">
+            <Grid Width="450" HorizontalAlignment="Left" >
+                <TextBlock Text="Total Supply"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+
+                <TextBlock Text="{Binding CoinByIdMarketData.MarketData.TotalSupply, StringFormat={}{0:#,#}}" 
+                           HorizontalAlignment="Right" 
+                           Foreground="White"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="4" 
+                BorderBrush="{StaticResource backColor1}" 
+                BorderThickness="0 0 0 1"
+                Margin="5 0 5 0">
+            <Grid Width="450" HorizontalAlignment="Left" >
+                <TextBlock Text="Max Supply"
+                           HorizontalAlignment="Left"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+
+                <TextBlock Text="{Binding CoinByIdMarketData.MarketData.MaxSupply, StringFormat={}{0:#,#}}" 
+                           HorizontalAlignment="Right" 
+                           Foreground="White"
+                           Style="{StaticResource simpleText}"
+                           FontWeight="Light"/>
+            </Grid>
+        </Border>
+
+    </Grid>
 
 </UserControl>
