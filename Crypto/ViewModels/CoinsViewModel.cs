@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Diagnostics;
 
 namespace Crypto.ViewModels;
 
@@ -55,12 +56,20 @@ public class CoinsViewModel : ViewModelBase
     }
 
     public ICommand FindCoinCommand { get; }
+    public ICommand OpenUrlCommand { get; }
 
     public CoinsViewModel()
     {
         LoadCoinsList();
         LoadCoinData();
         FindCoinCommand = new ViewModelCommand(ExecuteFindCoinCommand);
+        OpenUrlCommand = new ViewModelCommand(ExecuteOpenUrlCommand);
+    }
+
+    private void ExecuteOpenUrlCommand(object obj)
+    {
+        Uri uri = new Uri((string)obj);
+        Process.Start(new ProcessStartInfo { FileName = (string)obj, UseShellExecute = true});
     }
 
     private async void ExecuteFindCoinCommand(object obj)
