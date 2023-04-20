@@ -14,12 +14,26 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="0"
+                    Margin="10 0 0 0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TextBlock Style="{StaticResource simpleText}"
+                       FontSize="24"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontWeight="Medium">
+                Top 7 currencies by CoinGecko
+            </TextBlock>
+        </StackPanel>
+
         <ListView ItemsSource="{Binding Top7Conins}"
-                  Grid.Row="0"
+                  Grid.Row="1"
                   Background="Transparent"
                   BorderBrush="Transparent"
                   Foreground="White"

@@ -76,7 +76,7 @@
 
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="ArrowUpRightDots" Style="{StaticResource menuButtonIcon}"/>
-                                <TextBlock Text="Top 10 currencies" Style="{StaticResource menuButtonText}"/>
+                                <TextBlock Text="Top 7 currencies" Style="{StaticResource menuButtonText}"/>
                             </StackPanel>
                         </RadioButton>
 
