@@ -22,4 +22,8 @@
     <Resource Include="Images\Crypto-logo.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include=".assets\" />
+  </ItemGroup>
+
 </Project>
