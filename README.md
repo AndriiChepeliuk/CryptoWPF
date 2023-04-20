@@ -9,9 +9,11 @@ This a multi-page application with navigation which helps customers track crypto
 
 - The main page displays the top 7 currencies by CoinGecko.
 - The second page ("Coins") provide the ability to view detailed information about the currency: price, volume, price change, in which markets it can be purchased and at what price.
-- Customer has the ability to go to the currency page on the specific market.
-- Possibility of searching for currency by name, code or symbol.
-- Possibility of converting one currency to another.
+- Ability to go to the currency page of a specific market.
+- Ability to search currency by name, code or symbol.
+- The possibility of converting one currency into another.
+- Currency description.
+- Ability to go to the main page of the currency.
 
 ## Screenshots
 
