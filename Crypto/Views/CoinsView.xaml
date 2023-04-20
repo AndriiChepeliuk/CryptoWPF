@@ -7,7 +7,7 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:Crypto.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="1400">
+             d:DesignHeight="850" d:DesignWidth="1400">
 
     <UserControl.DataContext>
         <viewModel:CoinsViewModel/>
@@ -26,7 +26,10 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="260"/>
         </Grid.RowDefinitions>
 
         <!--#region SearchBox-->
@@ -291,6 +294,226 @@
             </Grid>
         </Border>
         <!--#endregion-->
+        <!--#endregion-->
+
+        <!--#region Description-->
+        <StackPanel Grid.Column="0" Grid.Row="5"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left">
+
+            <TextBlock Margin="10 0 0 0"
+                       Text="{Binding CoinByIdMarketData.Name, StringFormat={}What is {0}?}"
+                       Style="{StaticResource simpleText}"
+                       Foreground="White"
+                       FontSize="24"
+                       FontWeight="Medium"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6"
+                    HorizontalAlignment="Left">
+
+            <TextBlock Margin="10"
+                       Text="{Binding CoinByIdMarketData.Description[en]}"
+                       Style="{StaticResource simpleText}"
+                       Foreground="White"
+                       FontSize="16"
+                       FontWeight="Light"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"/>
+
+        </StackPanel>
+        <!--#endregion-->
+
+        <!--#region Converter-->
+
+        <StackPanel Grid.Column="2" Grid.Row="5"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left"
+                    Margin="10 0 10 0">
+
+            <TextBlock Margin="0"
+                       Text="{Binding CoinByIdMarketData.Name, StringFormat={}{0} Converter}"
+                       Style="{StaticResource simpleText}"
+                       Foreground="White"
+                       FontSize="24"
+                       FontWeight="Medium"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"/>
+
+        </StackPanel>
+        
+        <Border Grid.Column="2" Grid.Row="6" 
+                BorderBrush="{StaticResource backColor1}" 
+                BorderThickness="1"
+                CornerRadius="15"
+                Margin="10 0 10 0">
+
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" 
+                           Style="{StaticResource simpleText}" 
+                           Text="{Binding CoinByIdMarketData.Symbol}"/>
+
+                <TextBlock Grid.Column="0" Grid.Row="1" 
+                           Style="{StaticResource simpleText}" 
+                           Text="USD"/>
+                
+                <TextBox Grid.Column="1" Grid.Row="0"
+                         Style="{StaticResource textboxSearch}"
+                         IsReadOnly="False"
+                         Text="{Binding Coin}"/>
+
+                <TextBox Grid.Column="1" Grid.Row="1"
+                         Style="{StaticResource textboxSearch}"
+                         IsReadOnly="True"
+                         Text="{Binding USD}"/>
+
+                <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource searchButton}"
+                        Command="{Binding FindCoinCommand}">
+                    <fa:IconImage Icon="RightLeft" 
+                                  Width="20" Height="20" 
+                                  VerticalAlignment="Center"
+                                  Foreground="{StaticResource backColor1}" 
+                                  HorizontalAlignment="Right"
+                                  Margin="0 0 0 0"/>
+                </Button>
+
+                <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"
+                            Orientation="Horizontal">
+                    
+                    <TextBlock Margin="10 0 0 0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontWeight="Light"
+                           Foreground="{StaticResource textColor2}"
+                           Style="{StaticResource simpleText}"
+                           Text="{Binding CoinByIdMarketData.Symbol, StringFormat={}1 {0} \= }"/>
+
+                    <TextBlock Margin="10 0 0 0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontWeight="Light"
+                           Foreground="{StaticResource textColor2}"
+                           Style="{StaticResource simpleText}"
+                           Text="{Binding CoinByIdMarketData.MarketData.CurrentPrice[usd], StringFormat={}{0:c}}"/>
+                </StackPanel>
+                
+            </Grid>
+            
+        </Border>
+        <!--#endregion-->
+
+        <!--#region Markets-->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="0" Grid.Row="7"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left"
+                    Margin="10 0 10 0">
+
+            <TextBlock Margin="0"
+                       Text="{Binding CoinByIdMarketData.Name, StringFormat={}{0} Markets}"
+                       Style="{StaticResource simpleText}"
+                       Foreground="White"
+                       FontSize="24"
+                       FontWeight="Medium"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"/>
+
+        </StackPanel>
+
+        <DataGrid x:Name="customersDataGrid" 
+                  Height="250"
+                  Margin="10 0 10 0"
+                  VerticalAlignment="Top"
+                  ItemsSource="{Binding CoinByIdMarketData.Tickers}"
+                  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="8"
+                  Style="{DynamicResource MarketsDataGridStyle}"
+                  CellStyle="{DynamicResource MarketsDataGridCellStyle}"
+                  RowStyle="{DynamicResource MarketsDataGridRowStyle}"
+                  ColumnHeaderStyle="{DynamicResource MarketsDataGridColumnHeaderStyle}"
+                  SelectedItem="{Binding SeletedTicker}"
+                  MouseDoubleClick="customersDataGrid_MouseDoubleClick">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Exchange" 
+                                    IsReadOnly="True" 
+                                    CanUserResize="False" 
+                                    Width="*" 
+                                    Binding="{Binding Market.Name}"/>
+
+                <DataGridTextColumn Header="Pair" 
+                                    IsReadOnly="True" 
+                                    CanUserResize="False" 
+                                    Width="*">
+
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0}/{1}">
+                            <Binding Path="Base"/>
+                            <Binding Path="Target"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Price" 
+                                    IsReadOnly="True" 
+                                    CanUserResize="False" 
+                                    Width="*" 
+                                    Binding="{Binding Last, StringFormat={}${0:}}"/>
+
+                <DataGridTextColumn Header="Spread" 
+                                    IsReadOnly="True" 
+                                    CanUserResize="False" 
+                                    Width="*" 
+                                    Binding="{Binding Spread, StringFormat={}{0}%}"/>
+
+                <DataGridTextColumn Header="24h Volume" 
+                                    IsReadOnly="True" 
+                                    CanUserResize="False" 
+                                    Width="*" 
+                                    Binding="{Binding ConvertedVolume[usd], StringFormat={}{0:c0}}"/>
+
+                <DataGridTemplateColumn Header="Trust Score" 
+                                        IsReadOnly="True" 
+                                        CanUserResize="False" 
+                                        Width="*">
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Rectangle Height="10"
+                                           Width="10"
+                                           RadiusX="25"
+                                           RadiusY="25"
+                                           Fill="{Binding TrustScore}">
+                                </Rectangle>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+
+
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
         <!--#endregion-->
 
     </Grid>

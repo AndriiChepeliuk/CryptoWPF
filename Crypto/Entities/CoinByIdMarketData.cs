@@ -30,4 +30,7 @@ public class CoinByIdMarketData
 
     [JsonProperty("market_data")]
     public MarketData MarketData { get; set; }
+
+    [JsonProperty("tickers")]
+    public List<Ticker> Tickers { get; set; }
 }

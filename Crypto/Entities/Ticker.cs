@@ -20,6 +20,9 @@ public class Ticker
     [JsonProperty("volume")]
     public decimal Volume { get; set; }
 
+    [JsonProperty("bid_ask_spread_percentage")]
+    public decimal? Spread { get; set; }
+
     [JsonProperty("converted_last")]
     public Dictionary<string, decimal> ConvertedLast { get; set; }
 
@@ -28,4 +31,7 @@ public class Ticker
 
     [JsonProperty("trade_url")]
     public string TradeUrl { get; set; }
+
+    [JsonProperty("trust_score")]
+    public string TrustScore { get; set; }
 }

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Diagnostics;
 using FontAwesome.Sharp;
-using System.Drawing;
 
 namespace Crypto.ViewModels;
 
@@ -20,6 +19,9 @@ public class CoinsViewModel : ViewModelBase
     private List<CoinSimple> _coinsSearchList;
     private string _coinColor;
     private IconChar _chartIcon;
+    private Ticker _seletedTicker;
+    private decimal _usd;
+    private decimal _coin;
 
     public string CoinId
     {
@@ -69,7 +71,38 @@ public class CoinsViewModel : ViewModelBase
             OnPropertyChanged(nameof(ChartIcon));
         }
     }
-
+    public Ticker SeletedTicker
+    {
+        get { return _seletedTicker; }
+        set
+        {
+            _seletedTicker = value;
+            OnPropertyChanged(nameof(SeletedTicker));
+        }
+    }
+    public decimal USD
+    {
+        get { return _usd; }
+        set
+        {
+            _usd = value;
+            OnPropertyChanged(nameof(USD));
+        }
+    }
+    public decimal Coin
+    {
+        get { return _coin; }
+        set
+        {
+            _coin = value;
+            decimal? val;
+            if (_coinByIdMarketData.MarketData.CurrentPrice.TryGetValue("usd", out val))
+            {
+                _usd = val.Value * _coin;
+            }
+            OnPropertyChanged(nameof(Coin));
+        }
+    }
     public CoinByIdMarketData CoinByIdMarketData
     {
         get { return _coinByIdMarketData; }
@@ -82,6 +115,7 @@ public class CoinsViewModel : ViewModelBase
 
     public ICommand FindCoinCommand { get; }
     public ICommand OpenUrlCommand { get; }
+    public ICommand OpenTickerUrlCommand { get; }
 
     public CoinsViewModel()
     {
@@ -89,11 +123,20 @@ public class CoinsViewModel : ViewModelBase
         LoadCoinData();
         FindCoinCommand = new ViewModelCommand(ExecuteFindCoinCommand);
         OpenUrlCommand = new ViewModelCommand(ExecuteOpenUrlCommand);
+        OpenTickerUrlCommand = new ViewModelCommand(ExecuteOpenTickerUrlCommand);
+    }
+
+    private void ExecuteOpenTickerUrlCommand(object obj)
+    {
+        if (SeletedTicker.TradeUrl != null)
+        {
+            Process.Start(new ProcessStartInfo { FileName = SeletedTicker.TradeUrl, UseShellExecute = true });
+        }
+
     }
 
     private void ExecuteOpenUrlCommand(object obj)
     {
-        Uri uri = new Uri((string)obj);
         Process.Start(new ProcessStartInfo { FileName = (string)obj, UseShellExecute = true });
     }
 

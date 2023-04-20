@@ -148,7 +148,9 @@
 
                     <ContentControl Content="{Binding CurrentChildView}"
                                     Grid.Row="1"
-                                    Margin="25"/>
+                                    Margin="25"
+                                    ScrollViewer.CanContentScroll="True"
+                                    ScrollViewer.VerticalScrollBarVisibility="Visible"/>
 
                     <!--#endregion-->
 

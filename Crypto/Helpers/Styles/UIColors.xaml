@@ -13,6 +13,7 @@
 
     <!--#region Font Colors-->
     <SolidColorBrush x:Key="textColor1" Color="#969696"/>
+    <SolidColorBrush x:Key="textColor2" Color="#DEDEDE"/>
     <!--#endregion-->
 
     <!--#region Panel Colors-->
