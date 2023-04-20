@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Diagnostics;
+using FontAwesome.Sharp;
+using System.Drawing;
 
 namespace Crypto.ViewModels;
 
@@ -16,6 +18,8 @@ public class CoinsViewModel : ViewModelBase
     private string _errorMessage;
     private CoinByIdMarketData _coinByIdMarketData;
     private List<CoinSimple> _coinsSearchList;
+    private string _coinColor;
+    private IconChar _chartIcon;
 
     public string CoinId
     {
@@ -44,6 +48,27 @@ public class CoinsViewModel : ViewModelBase
             OnPropertyChanged(nameof(ErrorMessage));
         }
     }
+    public string CoinColor
+    {
+        get { return _coinColor; }
+        set
+        {
+            _coinColor = value;
+            OnPropertyChanged(nameof(CoinColor));
+        }
+    }
+    public IconChar ChartIcon
+    {
+        get
+        {
+            return _chartIcon;
+        }
+        set
+        {
+            _chartIcon = value;
+            OnPropertyChanged(nameof(ChartIcon));
+        }
+    }
 
     public CoinByIdMarketData CoinByIdMarketData
     {
@@ -69,14 +94,18 @@ public class CoinsViewModel : ViewModelBase
     private void ExecuteOpenUrlCommand(object obj)
     {
         Uri uri = new Uri((string)obj);
-        Process.Start(new ProcessStartInfo { FileName = (string)obj, UseShellExecute = true});
+        Process.Start(new ProcessStartInfo { FileName = (string)obj, UseShellExecute = true });
     }
 
     private async void ExecuteFindCoinCommand(object obj)
     {
-        var searchCoin = _coinsSearchList.Find(x => x.Id == SearchText.ToUpper() 
-                                            || x.Symbol == SearchText.ToUpper()
-                                            || x.Name == SearchText.ToUpper());
+        var searchCoin = _coinsSearchList.Find(x => x.Id == SearchText.ToUpper());
+
+        if (searchCoin == null)
+        {
+            searchCoin = _coinsSearchList.Find(x => x.Symbol == SearchText.ToUpper()
+                                                || x.Name == SearchText.ToUpper());
+        }
 
         if (searchCoin != null)
         {
@@ -101,6 +130,17 @@ public class CoinsViewModel : ViewModelBase
                 var coinById = await response.Content.ReadAsAsync<CoinByIdMarketData>();
 
                 coinById.Symbol = coinById.Symbol.ToUpper();
+
+                if (coinById.MarketData.PriceChangePercentage24H < 0)
+                {
+                    CoinColor = "Red";
+                    ChartIcon = IconChar.SortDown;
+                }
+                else
+                {
+                    CoinColor = "Green";
+                    ChartIcon = IconChar.SortUp;
+                }
 
                 CoinByIdMarketData = coinById;
             }

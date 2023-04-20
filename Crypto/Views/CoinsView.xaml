@@ -29,6 +29,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!--#region SearchBox-->
         <StackPanel Grid.Column="2" Grid.Row="0"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
@@ -48,7 +49,9 @@
             </Button>
 
         </StackPanel>
+        <!--#endregion-->
 
+        <!--#region ErrrorMessage-->
         <StackPanel Grid.Column="2" Grid.Row="1">
             <TextBlock 
                 Style="{StaticResource simpleText}"
@@ -58,7 +61,9 @@
                 Text="{Binding ErrorMessage}"/>
 
         </StackPanel>
+        <!--#endregion-->
 
+        <!--#region Info-->
         <StackPanel Grid.Column="2" Grid.Row="2"
                     Margin="10 0 0 0"
                     VerticalAlignment="Center">
@@ -71,6 +76,7 @@
             </TextBlock>
         </StackPanel>
 
+        <!--#region Website-->
         <StackPanel Grid.Column="2" Grid.Row="3"
                     Margin="10 0 0 0"
                     VerticalAlignment="Center"
@@ -93,7 +99,10 @@
                 </StackPanel>
             </Button>
         </StackPanel>
+        <!--#endregion-->
+        <!--#endregion -->
 
+        <!--#region Image, Name, Symbol-->
         <StackPanel Orientation="Horizontal"
                     Grid.Column="0" Grid.Row="0"
                     VerticalAlignment="Center"
@@ -126,27 +135,49 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"/>
         </StackPanel>
+        <!--#endregion-->
 
+        <!--#region Price-->
         <StackPanel Orientation="Horizontal"
                     Grid.Column="0" Grid.Row="1"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left">
 
             <TextBlock Margin="10"
-                       Text="{Binding CoinByIdMarketData.MarketData.CurrentPrice[usd], StringFormat={}{0:c}}"
+                       Text="{Binding CoinByIdMarketData.MarketData.CurrentPrice[usd], StringFormat={}${0:}}"
                        Style="{StaticResource simpleText}"
                        Foreground="White"
                        FontSize="24"
                        FontWeight="Light"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"/>
-        </StackPanel>
 
+            <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                <fa:IconImage Icon="{Binding ChartIcon}" 
+                              Width="12" Height="15" 
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Right"
+                              Margin="0"
+                              Foreground="{Binding CoinColor}"/>
+                <TextBlock Margin="0"
+                           Text="{Binding CoinByIdMarketData.MarketData.PriceChangePercentage24H, StringFormat={}{0:0.##; 0.##}%}"
+                           Style="{StaticResource simpleText}"
+                           Foreground="{Binding CoinColor}"
+                           FontSize="16"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+        <!--#endregion-->
+
+        <!--#region MarketData-->
+        <!--#region Market Cap-->
         <Border Grid.Column="0" Grid.Row="2" 
                 BorderBrush="{StaticResource backColor1}" 
                 BorderThickness="0 0 0 1"
                 Margin="10 0 10 0">
-            <Grid Width="450" HorizontalAlignment="Left" >
+            <Grid>
                 <TextBlock Text="Market Cap"
                            HorizontalAlignment="Left"
                            Style="{StaticResource simpleText}"
@@ -159,12 +190,14 @@
                            FontWeight="Light"/>
             </Grid>
         </Border>
+        <!--#endregion-->
 
+        <!--#region 24 Hour Trading Vol-->
         <Border Grid.Column="0" Grid.Row="3" 
                 BorderBrush="{StaticResource backColor1}" 
                 BorderThickness="0 0 0 1"
                 Margin="10 0 10 0">
-            <Grid Width="450" HorizontalAlignment="Left" >
+            <Grid>
                 <TextBlock Text="24 Hour Trading Vol"
                            HorizontalAlignment="Left"
                            Style="{StaticResource simpleText}"
@@ -177,12 +210,14 @@
                            FontWeight="Light"/>
             </Grid>
         </Border>
+        <!--#endregion-->
 
+        <!--#region Fully Diluted Valuation-->
         <Border Grid.Column="0" Grid.Row="4" 
                 BorderBrush="{StaticResource backColor1}" 
                 BorderThickness="0 0 0 1"
                 Margin="10 0 10 0">
-            <Grid Width="450" HorizontalAlignment="Left" >
+            <Grid>
                 <TextBlock Text="Fully Diluted Valuation"
                            HorizontalAlignment="Left"
                            Style="{StaticResource simpleText}"
@@ -195,12 +230,14 @@
                            FontWeight="Light"/>
             </Grid>
         </Border>
+        <!--#endregion-->
 
+        <!--#region Circulating Supply-->
         <Border Grid.Column="1" Grid.Row="2" 
                 BorderBrush="{StaticResource backColor1}" 
                 BorderThickness="0 0 0 1"
                 Margin="10 0 10 0">
-            <Grid Width="450" HorizontalAlignment="Left" >
+            <Grid>
                 <TextBlock Text="Circulating Supply"
                            HorizontalAlignment="Left"
                            Style="{StaticResource simpleText}"
@@ -213,12 +250,14 @@
                            FontWeight="Light"/>
             </Grid>
         </Border>
+        <!--#endregion-->
 
+        <!--#region Total Supply-->
         <Border Grid.Column="1" Grid.Row="3" 
                 BorderBrush="{StaticResource backColor1}" 
                 BorderThickness="0 0 0 1"
                 Margin="10 0 10 0">
-            <Grid Width="450" HorizontalAlignment="Left" >
+            <Grid>
                 <TextBlock Text="Total Supply"
                            HorizontalAlignment="Left"
                            Style="{StaticResource simpleText}"
@@ -231,12 +270,14 @@
                            FontWeight="Light"/>
             </Grid>
         </Border>
+        <!--#endregion-->
 
+        <!--#region Max Supply-->
         <Border Grid.Column="1" Grid.Row="4" 
                 BorderBrush="{StaticResource backColor1}" 
                 BorderThickness="0 0 0 1"
                 Margin="10 0 10 0">
-            <Grid Width="450" HorizontalAlignment="Left" >
+            <Grid>
                 <TextBlock Text="Max Supply"
                            HorizontalAlignment="Left"
                            Style="{StaticResource simpleText}"
@@ -249,6 +290,8 @@
                            FontWeight="Light"/>
             </Grid>
         </Border>
+        <!--#endregion-->
+        <!--#endregion-->
 
     </Grid>
 
