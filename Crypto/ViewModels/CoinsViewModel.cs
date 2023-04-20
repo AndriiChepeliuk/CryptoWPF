@@ -20,8 +20,10 @@ public class CoinsViewModel : ViewModelBase
     private string _coinColor;
     private IconChar _chartIcon;
     private Ticker _seletedTicker;
-    private decimal _usd;
-    private decimal _coin;
+    private decimal _usdCount;
+    private decimal _coinCount;
+    private bool _usdConverterTrigger = true;
+    private bool _coinConverterTrigger = true;
 
     public string CoinId
     {
@@ -80,27 +82,46 @@ public class CoinsViewModel : ViewModelBase
             OnPropertyChanged(nameof(SeletedTicker));
         }
     }
-    public decimal USD
+    public decimal UsdCount
     {
-        get { return _usd; }
+        get { return _usdCount; }
         set
         {
-            _usd = value;
-            OnPropertyChanged(nameof(USD));
+            _usdCount = value;
+
+            if (_usdConverterTrigger)
+            {
+                decimal? val;
+                if (_coinByIdMarketData.MarketData.CurrentPrice.TryGetValue("usd", out val))
+                {
+                    _coinConverterTrigger = false;
+                    CoinCount = _usdCount / val.Value;
+                    _coinConverterTrigger = true;
+                }
+            }
+
+            OnPropertyChanged(nameof(UsdCount));
         }
     }
-    public decimal Coin
+    public decimal CoinCount
     {
-        get { return _coin; }
+        get { return _coinCount; }
         set
         {
-            _coin = value;
-            decimal? val;
-            if (_coinByIdMarketData.MarketData.CurrentPrice.TryGetValue("usd", out val))
+            _coinCount = value;
+
+            if (_coinConverterTrigger)
             {
-                _usd = val.Value * _coin;
+                decimal? val;
+                if (_coinByIdMarketData.MarketData.CurrentPrice.TryGetValue("usd", out val))
+                {
+                    _usdConverterTrigger = false;
+                    UsdCount = val.Value * _coinCount;
+                    _usdConverterTrigger = true;
+                }
             }
-            OnPropertyChanged(nameof(Coin));
+
+            OnPropertyChanged(nameof(CoinCount));
         }
     }
     public CoinByIdMarketData CoinByIdMarketData
