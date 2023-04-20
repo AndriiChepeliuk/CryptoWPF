@@ -12,6 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include=".assets\Coins.JPG" />
+    <Content Include=".assets\Top7currencies.JPG" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FontAwesome.Sharp" Version="6.3.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -20,10 +25,6 @@
 
   <ItemGroup>
     <Resource Include="Images\Crypto-logo.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include=".assets\" />
   </ItemGroup>
 
 </Project>
