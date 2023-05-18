@@ -234,10 +234,10 @@ public class CoinsViewModel : ViewModelBase
 
                 _coinsSearchList = coins;
             }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
+            //else
+            //{
+            //    throw new Exception(response.ReasonPhrase);
+            //}
         }
     }
 

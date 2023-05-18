@@ -384,8 +384,7 @@
 
                 <Button Grid.Column="2" Grid.Row="0" Grid.RowSpan="2"
                         HorizontalAlignment="Left"
-                        Style="{StaticResource searchButton}"
-                        Command="{Binding FindCoinCommand}">
+                        Style="{StaticResource searchButton}">
                     <fa:IconImage Icon="RightLeft" 
                                   Width="20" Height="20" 
                                   VerticalAlignment="Center"
